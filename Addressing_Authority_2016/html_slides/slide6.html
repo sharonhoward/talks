@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+     <title>London Lives Petitions: word counts parish v other</title>
+</head>
+<body>
+<header>
+<div class="nav">
+<span style="float:left; width:10%;">
+<a href="slide5.html">&lAarr;</a></span>
+<span style="float:right; text-align:right; width:10%;">
+<a href="./">&#10506;</a></span>
+</div>
+<h1>London Lives Petitions average word counts: parish v other, 1690-1799</h1>
+</header>
+
+<div id="chartContainer">
+  <script src="js/d3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", "99%", "85%");
+      d3.tsv("data/llpp_petitions_wordcounts_av_exob_v1-2.tsv", function (data) {
+
+        var myChart = new dimple.chart(svg, data);
+      myChart.setMargins(60, 30, 30, 50)
+      var x = myChart.addCategoryAxis("x", "year");
+      x.addOrderRule("Date");
+
+      var y = myChart.addLogAxis("y", "av_words",4);
+      y.overrideMin = 64;  
+
+      
+       var z = myChart.addMeasureAxis("z", "petitions");
+      z.overrideMax = 800;  
+      
+      var s = myChart.addSeries("petitions_type", dimple.plot.bubble);      
+        
+      myChart.defaultColors = [
+          new dimple.color("#b24747", "#d35400", 1), // orange
+          //new dimple.color("#7ea8fc", "#2980b9", 1), // blue
+          //new dimple.color("#fb6547", "#c0392b", 1), // red
+          //new dimple.color("#9b59b6", "#8e44ad", 1), // purple
+          new dimple.color("#47b2b2", "#16a085", 1), // turquoise
+          //new dimple.color("#95a5a6", "#7f8c8d", 1),  // gray
+          //new dimple.color("FF0000")
+      ];
+
+      myChart.addLegend(50, 10, "90%", "70%", "right");
+        
+        myChart.draw();
+      });
+
+  </script>
+</div>
+
+</body>
+</html>

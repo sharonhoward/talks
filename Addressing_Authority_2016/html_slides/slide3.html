@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+     <title>London Lives Petitions: by court</title>
+</head>
+<body>
+<header>
+<div class="nav">
+<span style="float:left; width:10%;">
+<a href="slide2.html">&lAarr;</a></span>
+<span style="float:right; text-align:right; width:10%;">
+<a href="slide4.html">&rAarr;</a></span>
+</div>
+<h1>London Lives Petitions, by court, 1690-1799</h1>
+</header>
+<div id="chartContainer">
+  <script src="js/d3.min.js"></script>
+ <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", "99%", "85%");
+    d3.tsv("data/llpp_pets_year_court_v1-2.tsv", function (data) {
+      var myChart = new dimple.chart(svg, data);
+      myChart.setMargins(50, 30, 30, 50)
+      var x = myChart.addCategoryAxis("x", "year");
+      x.addOrderRule("Date");
+      myChart.addMeasureAxis("y", "petitions");
+      myChart.addSeries("court", dimple.plot.bar);       
+      
+      myChart.defaultColors = [
+          new dimple.color("#b24747", "#d35400", 1), // orange
+          new dimple.color("#fb6547", "#c0392b", 1), // red
+          new dimple.color("#faae15", "#d35400", 1), // orange
+          //new dimple.color("#7ea8fc", "#2980b9", 1), // blue
+          new dimple.color("#9b59b6", "#8e44ad", 1), // purple
+          new dimple.color("#1abc9c", "#16a085", 1), // turquoise
+          //new dimple.color("#95a5a6", "#7f8c8d", 1),  // gray
+          //new dimple.color("#383A40", "ff0000", 1),  // gray
+          //new dimple.color("FF0000")
+      ];
+      
+ 
+      myChart.addLegend(50, 10, "90%", "70%", "right");
+      myChart.draw();
+    });
+  </script>
+</div>
+<div class="nav" style="float:right;padding:0 5px;"><a href="./">&#10506;</a></div>
+</body>
+</html>
